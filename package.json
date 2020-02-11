@@ -1,0 +1,28 @@
+{
+  "name": "tchien",
+  "version": "1.0.0",
+  "description": "Chat textuel, pour chien",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "tsc && node ./dist/app.js",
+    "start": "ts-node src/index.ts"
+ },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "@types/mongodb": "^3.3.15",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/node": "^12.12.25",
+    "ts-node": "3.3.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.5"
+  }
+}
