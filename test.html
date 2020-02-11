@@ -7,6 +7,7 @@
  ___Y  ,    .'7 /|
 (_,___/...-` (_/_/
 </pre>
+
 <textarea type="text" id="message"></textarea>
 <button onclick="send()">Send</button>
 <pre id="messages"></pre>
@@ -16,11 +17,14 @@
 <script>
 	var socket = io('http://10.35.12.168:8080');
 	socket.on('message', function (message) {
-		document.getElementById('messages').append("\n" + message);
+		document.getElementById('messages').append("\n" +  message);
 	});
 
 	function send(message = document.getElementById('message').value) {
 		socket.emit('message', message);
-		document.body.append(message);
+		let messageElement = document.createElement('span');
+		messageElement.style.color = 'red';
+		messageElement.textContent = message;
+		document.getElementById('messages').appendChild(messageElement);
 	}
 </script>
