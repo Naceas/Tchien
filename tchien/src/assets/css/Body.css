@@ -1,0 +1,23 @@
+.message-box{
+    position: fixed;
+    bottom:0px;
+    margin-bottom: 3px;
+    border-radius: 60px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #B37700;
+    background-color: white;
+    z-index: 10;
+}
+
+.sendBouton{
+    height: 20px;
+    padding: 10px;
+}
+
+.discussion{
+    overflow-wrap: break-word;
+    
+    max-width: 500px;
+}
+
