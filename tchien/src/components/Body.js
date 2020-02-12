@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { MDBInput, MDBRow, MDBBtn, MDBContainer } from 'mdbreact'
 import "../assets/css/Body.css"
+import "../assets/css/bounce.css"
 import Cookies from 'universal-cookie';
 import io from 'socket.io-client'
-
+import FadeIn from 'react-fade-in';
 const cookies = new Cookies();
 
 export default class Body extends React.Component {
@@ -15,7 +17,7 @@ export default class Body extends React.Component {
             pseudo: cookies.get('pseudo') || 'Unknown Doggo'
         };
 
-        this.socket = io('http://omega-community.fr:8080');
+        this.socket = io('http://omega-community.fr:8080    ');
         this.socket.on('message', data => {
             this.print(data.message, data.pseudo);
         });
@@ -23,23 +25,22 @@ export default class Body extends React.Component {
 
     print = (message, pseudo = null) => {
         var messages = document.getElementById('messages');
-        var pseudoElement = document.createElement('u');
         var messageElement = document.createElement('span');
 
         pseudoElement.className = 'coucou';
 
         var br = document.createElement('br');
 
-        messageElement.textContent = message;
+        messageElement.className = 'messages';
+
         if (!pseudo) {
             pseudo = this.state.pseudo;
-            pseudoElement.style.backgroundColor = '#FFBB33';
+            messageElement.style.float = 'right';
+            messageElement.className="messageRight"
         }
 
-        pseudoElement.textContent = pseudo;
+        messageElement.textContent =  pseudo + " : " + message;
 
-        messages.appendChild(pseudoElement);
-        messages.append(" : ");
         messages.appendChild(messageElement);
         messages.appendChild(br);
     }
@@ -68,7 +69,9 @@ export default class Body extends React.Component {
         return (
             <div>
                 <MDBContainer fluid >
-                    <div className="discussion" id="messages"></div>
+                    
+                        <div className="" id="messages"></div>
+                    
                 </MDBContainer>
 
                 <MDBContainer fluid className="message-box">

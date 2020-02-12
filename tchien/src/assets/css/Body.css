@@ -18,18 +18,40 @@
     border-width: 1px;
     border-color: #B37700;
     background-color: white;
-    z-index: 0;
-    width: 50vw;
-    height: 5em;
-    padding: 2em;
-    min-width: 100px;
+    z-index: 10;
 }
 
-#sendButton {
-    height: 4em;
-    padding: 1em;
-    border-radius: 20px;
-    position: fixed;
-    bottom: 2em;
-    right: 26%;
+.sendBouton{
+    height: 20px;
+    padding: 10px;
 }
+
+.discussion{
+    overflow-wrap: break-word;
+    
+    max-width: 500px;
+
+    border-style: none;
+    border-radius: 10%;
+    padding: 10px;
+}
+
+.messages {
+    background: linear-gradient(75deg,#9EB3E8, white);
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.messageRight{
+    background: linear-gradient(75deg,#B37700,#FFBB33) ;
+    color:black;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, .2);
+}
+
+
+
