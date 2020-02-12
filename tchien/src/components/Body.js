@@ -17,7 +17,7 @@ export default class Body extends React.Component {
             pseudo: cookies.get('pseudo') || 'Unknown Doggo'
         };
 
-        this.socket = io('http://omega-community.fr:8080    ');
+        this.socket = io('localhost:8080'); // 10.35.12.168 | http://omega-community.fr
         this.socket.on('message', data => {
             this.print(data.message, data.pseudo);
         });
@@ -27,19 +27,16 @@ export default class Body extends React.Component {
         var messages = document.getElementById('messages');
         var messageElement = document.createElement('span');
 
-        pseudoElement.className = 'coucou';
-
         var br = document.createElement('br');
 
         messageElement.className = 'messages';
 
         if (!pseudo) {
             pseudo = this.state.pseudo;
-            messageElement.style.float = 'right';
-            messageElement.className="messageRight"
+            messageElement.className += " messageRight";
         }
 
-        messageElement.textContent =  pseudo + " : " + message;
+        messageElement.textContent = pseudo + " : " + message;
 
         messages.appendChild(messageElement);
         messages.appendChild(br);
@@ -59,7 +56,7 @@ export default class Body extends React.Component {
     }
 
     render() {
-        let self = this;        
+        let self = this;
         onkeydown = event => {
             if (event.keyCode == 13) {
                 self.send();
@@ -69,9 +66,9 @@ export default class Body extends React.Component {
         return (
             <div>
                 <MDBContainer fluid >
-                    
-                        <div className="" id="messages"></div>
-                    
+
+                    <div className="" id="messages"></div>
+
                 </MDBContainer>
 
                 <MDBContainer fluid className="message-box">
