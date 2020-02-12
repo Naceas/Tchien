@@ -1,23 +1,35 @@
-.message-box{
+.message-box {
+    text-align: center;
+}
+
+.discussion {
+    overflow-wrap: break-word;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow: auto;
+}
+
+#message {
     position: fixed;
-    bottom:0px;
-    margin-bottom: 3px;
-    border-radius: 60px;
+    bottom: 1em;
+    left: 25%;
+    border-radius: 30px;
     border-style: solid;
     border-width: 1px;
     border-color: #B37700;
     background-color: white;
-    z-index: 10;
+    z-index: 0;
+    width: 50vw;
+    height: 5em;
+    padding: 2em;
+    min-width: 100px;
 }
 
-.sendBouton{
-    height: 20px;
-    padding: 10px;
+#sendButton {
+    height: 4em;
+    padding: 1em;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 2em;
+    right: 26%;
 }
-
-.discussion{
-    overflow-wrap: break-word;
-    
-    max-width: 500px;
-}
-

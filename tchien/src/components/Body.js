@@ -15,7 +15,7 @@ export default class Body extends React.Component {
             pseudo: cookies.get('pseudo') || 'Unknown Doggo'
         };
 
-        this.socket = io('http://10.35.12.168:8080');
+        this.socket = io('http://10.35.12.168:8080'); // tchien-web-app.firebaseapp.com
         this.socket.on('message', data => {
             this.print(data.message, data.pseudo);
         });
@@ -23,8 +23,11 @@ export default class Body extends React.Component {
 
     print = (message, pseudo = null) => {
         var messages = document.getElementById('messages');
-        var pseudoElement = document.createElement('u')
+        var pseudoElement = document.createElement('u');
         var messageElement = document.createElement('span');
+
+        pseudoElement.className = 'coucou';
+
         var br = document.createElement('br');
 
         messageElement.textContent = message;
@@ -43,6 +46,10 @@ export default class Body extends React.Component {
 
     send = () => {
         let message = document.getElementById('message');
+
+        if (!message.value) {
+            return;
+        }
 
         this.socket.emit('message', { "pseudo": this.state.pseudo, "message": message.value });
         this.print(message.value);
@@ -67,7 +74,7 @@ export default class Body extends React.Component {
                 <MDBContainer fluid className="message-box">
                     <MDBRow className="rowToBeAlgined">
                         <input id="message" size="lg" placeholder="ton -Wouaf-ssage ici !" />
-                        <MDBBtn className="sendBouton" onClick={this.send} >Envoyer</MDBBtn>
+                        <MDBBtn id="sendButton" onClick={this.send} className="btn btn-dark-green" >Envoyer</MDBBtn>
                     </MDBRow>
                 </MDBContainer>
             </div>

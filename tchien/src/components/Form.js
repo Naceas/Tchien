@@ -32,7 +32,7 @@ export default class Form extends React.Component {
 		return (
 			<MDBContainer size="sm">
 				<MDBRow center>
-					<MDBCol bottom md="4">
+					<MDBCol md="4" className="MDBCol">
 						<h1>TCHIEN</h1>
 						<img src="https://cdn.discordapp.com/attachments/664806572622610445/676775967930449940/TchienLogo.gif" alt="Logo Tchien" width="256" />
 						<br />
