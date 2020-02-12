@@ -15,24 +15,16 @@ export default class Form extends React.Component {
 	join = () => {
 		const { cookiePseudo } = this.state;
 
-		console.log("Joining");
-		// let pseudo = document.getElementById('pseudo');
-
-		// if (!pseudo) {
-		// 	return;
-		// }
-
 		if (!cookiePseudo) {
 			console.error('Pseudo empty !');
 		} else {
 			console.log("Pseudo : " + cookiePseudo);
-			cookies.set('pseudo', cookiePseudo)
+			cookies.set('pseudo', cookiePseudo);
+			window.location.replace('/tchat')
 		}
 	}
 
 	handleChange = (event) => {
-		console.log(event.target.value);
-		
 		this.setState({ [event.target.name]: event.target.value });
 	}
 
