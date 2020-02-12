@@ -15,7 +15,7 @@ export default class Body extends React.Component {
             pseudo: cookies.get('pseudo') || 'Unknown Doggo'
         };
 
-        this.socket = io('http://10.35.12.168:8080'); // tchien-web-app.firebaseapp.com
+        this.socket = io('http://omega-community.fr:8080');
         this.socket.on('message', data => {
             this.print(data.message, data.pseudo);
         });
