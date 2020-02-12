@@ -1,50 +1,85 @@
 import React from 'react';
-import {MDBInput, MDBRow, MDBBtn, MDBContainer} from 'mdbreact'
+import { MDBInput, MDBRow, MDBBtn, MDBContainer } from 'mdbreact'
 import "../assets/css/Body.css"
-
+import Cookies from 'universal-cookie';
 import io from 'socket.io-client'
 
-export default class Body extends React.Component{
-    constructor(props){
-        super(props)
+const cookies = new Cookies();
 
-        this.state={
-            connected:false
-        }
+export default class Body extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            connected: false,
+            pseudo: cookies.get('pseudo') || 'Unknown Doggo'
+        };
+
+        this.socket = io('http://10.35.12.168:8080'); // tchien-web-app.firebaseapp.com
+        this.socket.on('message', data => {
+            this.print(data.message, data.pseudo);
+        });
     }
 
+    print = (message, pseudo = null) => {
+        var messages = document.getElementById('messages');
+        var pseudoElement = document.createElement('u');
+        var messageElement = document.createElement('span');
 
-    
-    
-    render(){
-         
-        var socket = io('http://10.35.12.168:8080');
-	        socket.on('message', function (message) {
-		    document.getElementById('messages').append("\n" +  message);
-	    });
+        pseudoElement.className = 'coucou';
 
-	function send(message = document.getElementById('message').value) {
-		socket.emit('message', message);
-		let messageElement = document.createElement('span');
-		messageElement.style.backgroundColor = 'red';
-		messageElement.textContent = message;
-		document.getElementById('messages').appendChild(messageElement);
-	}
-        return(
+        var br = document.createElement('br');
+
+        messageElement.textContent = message;
+        if (!pseudo) {
+            pseudo = this.state.pseudo;
+            pseudoElement.style.backgroundColor = '#FFBB33';
+        }
+
+        pseudoElement.textContent = pseudo;
+
+        messages.appendChild(pseudoElement);
+        messages.append(" : ");
+        messages.appendChild(messageElement);
+        messages.appendChild(br);
+    }
+
+    send = () => {
+        let message = document.getElementById('message');
+
+        if (!message.value) {
+            return;
+        }
+
+        this.socket.emit('message', { "pseudo": this.state.pseudo, "message": message.value });
+        this.print(message.value);
+
+        message.value = '';
+    }
+
+    render() {
+        let self = this;        
+        onkeydown = event => {
+            if (event.keyCode == 13) {
+                self.send();
+            }
+        }
+
+        return (
             <div>
-                <MDBContainer  fluid >
+                <MDBContainer fluid >
                     <div className="discussion" id="messages"></div>
                 </MDBContainer>
-                
+
                 <MDBContainer fluid className="message-box">
                     <MDBRow className="rowToBeAlgined">
                         <input id="message" size="lg" placeholder="ton -Wouaf-ssage ici !" />
-                        <MDBBtn className="sendBouton" onClick={()=>send()} >Envoyer</MDBBtn>
+                        <MDBBtn id="sendButton" onClick={this.send} className="btn btn-dark-green" >Envoyer</MDBBtn>
                     </MDBRow>
                 </MDBContainer>
             </div>
         )
     }
 
-   
+
 }
