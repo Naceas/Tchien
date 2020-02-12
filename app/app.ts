@@ -1,4 +1,4 @@
-import express = require('express');
+import * as express from "express";
 import { Router } from 'express';
 import * as bodyParser from "body-parser";
 import { SocketCollection } from './SocketCollection';
@@ -20,15 +20,13 @@ router.get("/", (req, res) => {
 });
 
 var collection = new SocketCollection();
-io.on('connection', socket => {
+io.on('connection', (socket: any) => {
 	console.log('Connected');
 	
 
 	collection.add(socket);
 
-	socket.on('message', data => {
-		console.log(data);
-		
+	socket.on('message', (data: Object) => {	
 		collection.emit('message', data, socket);
 	});
 });
